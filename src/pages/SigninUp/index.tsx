@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useCallback} from "react";
 import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
 
 
 import { FiMail, FiLock, FiUser, FiArrowLeft} from 'react-icons/fi';
@@ -12,9 +13,25 @@ import Input from "../../components/Input";
 
 
 const SingnUp: React.FC = () =>{
-    function handleSubmit(date: object): void {
-        console.log(date);
-    }
+    const handleSubmit = useCallback( async (data: object) => {
+        try {
+            const schema = Yup.object().shape({
+                name: Yup.string().required('Nome é obrigatório'),
+                email: Yup.string().required('O e-mail é obrigatório').email('Digite um E-mail válido'),
+                password: Yup.string().min(6, 'A senha tem que ter no minimo 6 digitos')
+    
+            });
+
+            await schema.validate(data, { abortEarly: false });
+        } catch (error) {
+            if (error instanceof Yup.ValidationError) {
+                console.log(error.errors); 
+                console.log(error.inner); 
+            } else {
+                console.log(error);
+            }
+        }
+    }, []);
 
     const initialValues = {
         name: '',
