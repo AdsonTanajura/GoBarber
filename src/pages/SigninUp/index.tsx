@@ -10,17 +10,17 @@ import { Container, Content, Background } from './styles';
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 
-const initialValues = {
-    name: '',
-    email: '',
-    password: '',
-};
 
 const SingnUp: React.FC = () =>{
     function handleSubmit(date: object): void {
         console.log(date);
     }
 
+    const initialValues = {
+        name: '',
+        email: '',
+        password: '',
+    };
 
     return (
 
