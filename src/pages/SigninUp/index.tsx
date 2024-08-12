@@ -12,32 +12,22 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 
 
+
 const SingnUp: React.FC = () =>{
-    const handleSubmit = useCallback( async (data: object) => {
-        try {
-            const schema = Yup.object().shape({
-                name: Yup.string().required('Nome é obrigatório'),
-                email: Yup.string().required('O e-mail é obrigatório').email('Digite um E-mail válido'),
-                password: Yup.string().min(6, 'A senha tem que ter no minimo 6 digitos')
-    
-            });
-
-            await schema.validate(data, { abortEarly: false });
-        } catch (error) {
-            if (error instanceof Yup.ValidationError) {
-                console.log(error.errors); 
-                console.log(error.inner); 
-            } else {
-                console.log(error);
-            }
-        }
-    }, []);
-
     const initialValues = {
         name: '',
         email: '',
         password: '',
     };
+    const schema = Yup.object().shape({
+        name: Yup.string().required('Nome é obrigatório'),
+        email: Yup.string().required('O e-mail é obrigatório').email('Digite um E-mail válido'),
+        password: Yup.string().required('Senha é obrigatória').min(6, 'A senha tem que ter no minimo 6 digitos')
+
+    });
+    const handleSubmit = useCallback( async (data: object) => {
+        console.log(data);
+    }, []);
 
     return (
 
@@ -50,6 +40,7 @@ const SingnUp: React.FC = () =>{
                 <Formik
                     initialValues={initialValues}
                     onSubmit={handleSubmit}
+                    validationSchema={schema}
                 >
                     {() => (
                         <Form >
