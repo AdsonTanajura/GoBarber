@@ -51,8 +51,8 @@ const SingnUp: React.FC = () =>{
                     initialValues={initialValues}
                     onSubmit={handleSubmit}
                 >
-                    {({ handleSubmit }) => (
-                        <Form onSubmit={handleSubmit}>
+                    {() => (
+                        <Form >
                             <h1>Faça seu logon</h1>
                             <Input name="name" icon={FiUser} placeholder="Nome" />
                             <Input name="email" icon={FiMail} placeholder="E-mail" />
