@@ -1,6 +1,7 @@
 import React, { InputHTMLAttributes, useState, useCallback } from "react";
 import { IconBaseProps } from 'react-icons';
-import { Container } from "./styles";
+import { FiAlertCircle } from 'react-icons/fi';
+import { Container, Error } from "./styles";
 import { useField } from 'formik';
 
 
@@ -25,14 +26,18 @@ const Input: React.FC<InputProps> = ({ icon: Icon, name, ...rest }) => {
     const handInputFocused = useCallback(()=> (setFocused(true)), []);
 
     return (
-        <Container isFilled= {isFilled} isFocused= {isFocused}>
+        <Container isErrored={!!meta.error}  isFilled= {isFilled} isFocused= {isFocused}>
             { Icon && <Icon size={20} /> }
             <input 
                 onFocus={handInputFocused}
                 onBlur={handleInputBlur}
                 {...field} {...rest} 
             />
-            <div>{meta.error}</div>
+            {meta.error && 
+                <Error tilte={meta.error} >
+                <   FiAlertCircle color="#c53030" size={20}/>
+                </Error>
+            }
         </Container>
     );
 };

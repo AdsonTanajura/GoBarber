@@ -22,7 +22,7 @@ const SingnUp: React.FC = () =>{
     const schema = Yup.object().shape({
         name: Yup.string().required('Nome é obrigatório'),
         email: Yup.string().required('O e-mail é obrigatório').email('Digite um E-mail válido'),
-        password: Yup.string().required('Senha é obrigatória').min(6, 'A senha tem que ter no minimo 6 digitos')
+        password: Yup.string().required('Campo obrigatório').min(6, 'A senha tem que ter no minimo 6 digitos')
 
     });
     const handleSubmit = useCallback( async (data: object) => {
