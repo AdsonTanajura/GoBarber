@@ -5,10 +5,14 @@ import GlobalStyles from './styles/global';
 import SingnIn from './pages/SignIn';
 // import SingnUp from './pages/SigninUp';
 
+import AuthContext from './context/AuthContext';
+
 
 const App: React.FC = () => (
   <>
-    <SingnIn /> 
+    <AuthContext.Provider value={{name: 'Adson'}}>
+      <SingnIn /> 
+    </AuthContext.Provider>
     <GlobalStyles />
   </>
 

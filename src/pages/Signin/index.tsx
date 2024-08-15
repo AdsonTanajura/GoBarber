@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
@@ -8,9 +8,14 @@ import logoImg from '../../assets/Logo.svg';
 import { Container, Content, Background } from './styles';
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import AuthContext from "../../context/AuthContext";
 
 
 const SingnIn: React.FC = () =>{
+    const auth = useContext(AuthContext);
+
+    console.log(auth);
+
     const initialValues = {
         email: '',
         password: '',
