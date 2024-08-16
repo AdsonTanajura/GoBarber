@@ -21,7 +21,8 @@ interface SingInFormData {
 
 const SingnIn: React.FC = () =>{
 
-    const { singIn } = useContext(AuthContext);
+    const { user, singIn } = useContext(AuthContext);
+
 
     const initialValues = {
         email: '',
