@@ -6,16 +6,18 @@ import GlobalStyles from './styles/global';
 import SingnIn from './pages/SignIn';
 // import SingnUp from './pages/SigninUp';
 
-import { AuthProvider } from './hooks/AuthContext';
-import ToastContainer from './components/ToastContainer';
+
+import AppProvider from './hooks';
 
 const App: React.FC = () => (
   <StyleSheetManager shouldForwardProp={customIsPropValid}>
-    <AuthProvider >
-    <SingnIn /> 
-    </AuthProvider>
-    <ToastContainer />
+
+    <AppProvider >
+      <SingnIn /> 
+    </AppProvider>
+
     <GlobalStyles />
+
   </StyleSheetManager>
 
 );

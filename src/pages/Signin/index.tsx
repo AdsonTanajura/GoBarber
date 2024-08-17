@@ -10,6 +10,7 @@ import { Container, Content, Background } from './styles';
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { useAuth } from "../../hooks/AuthContext";
+import { useToast } from "../../hooks/ToastContext";
 // import getValidationError from "../../utils/getValidationError";
 
 
@@ -21,9 +22,9 @@ interface SingInFormData {
 
 const SingnIn: React.FC = () =>{
 
-    const { user ,singIn } = useAuth()
+    const { singIn } = useAuth()
 
-    console.log(user);
+    const { addToast } = useToast();
 
     const initialValues = {
         email: '',
@@ -41,7 +42,7 @@ const SingnIn: React.FC = () =>{
             await schema.validate(data, {
                 abortEarly: false,
             })
-            singIn({
+            await singIn({
                 email: data.email,
                 password: data.password,
             })
@@ -51,9 +52,9 @@ const SingnIn: React.FC = () =>{
             //         console.log(`Erro no campo ${err.path}: ${err.message}`);
             //     });
             // }
-
+            addToast();
         }
-    }, [schema, singIn]);
+    }, [schema, singIn, addToast]);
 
     return (
         <Container>
