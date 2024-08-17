@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback } from "react";
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
@@ -9,7 +9,7 @@ import logoImg from '../../assets/Logo.svg';
 import { Container, Content, Background } from './styles';
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-import { AuthContext } from "../../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import getValidationError from "../../utils/getValidationError";
 
 
@@ -21,8 +21,9 @@ interface SingInFormData {
 
 const SingnIn: React.FC = () =>{
 
-    const { user, singIn } = useContext(AuthContext);
+    const { user ,singIn } = useAuth()
 
+    console.log(user);
 
     const initialValues = {
         email: '',

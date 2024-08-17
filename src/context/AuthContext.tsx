@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useCallback, useState } from 'react';
+import React, { createContext, ReactNode, useCallback, useState, useContext } from 'react';
 import api from '../services/api';
 
 interface SingInCredentials {
@@ -21,7 +21,7 @@ interface AuthSate {
 }
 
 
-export const AuthContext = createContext<AuthContextDTO>({} as AuthContextDTO);
+const AuthContext = createContext<AuthContextDTO>({} as AuthContextDTO);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [data, setData] = useState<AuthSate>(() => {
@@ -55,4 +55,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         </AuthContext.Provider>
 
     )
-}
+};
+
+export function useAuth(): AuthContextDTO {
+    const contex = useContext(AuthContext);
+    if (!contex) {
+        throw new Error('useAuth msut be used within an AuthProvider');
+    };
+
+    return contex;
+};
