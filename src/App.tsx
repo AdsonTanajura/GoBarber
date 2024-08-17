@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheetManager } from 'styled-components';
-import isPropValid from '@emotion/is-prop-valid';
+import { customIsPropValid } from './utils/customIsPropValid';
 
 import GlobalStyles from './styles/global';
 import SingnIn from './pages/SignIn';
@@ -9,9 +9,9 @@ import SingnIn from './pages/SignIn';
 import { AuthProvider } from './hooks/AuthContext';
 
 const App: React.FC = () => (
-  <StyleSheetManager shouldForwardProp={isPropValid}>
+  <StyleSheetManager shouldForwardProp={customIsPropValid}>
     <AuthProvider >
-      <SingnIn /> 
+    <SingnIn /> 
     </AuthProvider>
     <GlobalStyles />
   </StyleSheetManager>

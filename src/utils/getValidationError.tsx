@@ -9,7 +9,9 @@ export default function getValidationError(err: ValidationError) {
     const validationErrors: Errors = {};
 
     err.inner.forEach(error => {
-        if (error.path) {validationErrors[error.path] = error.message}
+        if (error.path) {
+            
+            return validationErrors[error.path] = error.message}
 
         else{
             return console.log(error)

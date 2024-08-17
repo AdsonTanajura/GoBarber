@@ -58,7 +58,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
      }, [])
 
     return (
-        <AuthContext.Provider value={{user: data.user, singIn, singOut}}>a
+        <AuthContext.Provider value={{user: data.user, singIn, singOut}}>
             {children}
         </AuthContext.Provider>
 
