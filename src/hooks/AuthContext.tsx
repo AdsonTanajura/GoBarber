@@ -9,6 +9,7 @@ interface SingInCredentials {
 interface AuthContextDTO {
     user: object;
     singIn(credentials: SingInCredentials): Promise<void>;
+    singOut():void
 }
 
 interface AuthProviderProps {
@@ -25,7 +26,7 @@ const AuthContext = createContext<AuthContextDTO>({} as AuthContextDTO);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [data, setData] = useState<AuthSate>(() => {
-       const token = localStorage.getItem('@Gobaber:token');
+        const token = localStorage.getItem('@Gobaber:token');
         const user = localStorage.getItem('@Gobaber:user');
 
         if (token && user) {
@@ -49,8 +50,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setData({ token, user });
     }, []);
 
+    const singOut = useCallback(() => {
+        localStorage.removeItem('@Gobaber:token');
+        localStorage.removeItem('@Gobaber:user');
+
+        setData({} as AuthSate);
+     }, [])
+
     return (
-        <AuthContext.Provider value={{user: data.user, singIn}}>a
+        <AuthContext.Provider value={{user: data.user, singIn, singOut}}>a
             {children}
         </AuthContext.Provider>
 

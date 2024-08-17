@@ -6,7 +6,7 @@ import GlobalStyles from './styles/global';
 import SingnIn from './pages/SignIn';
 // import SingnUp from './pages/SigninUp';
 
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider } from './hooks/AuthContext';
 
 const App: React.FC = () => (
   <StyleSheetManager shouldForwardProp={isPropValid}>
