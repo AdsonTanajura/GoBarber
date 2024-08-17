@@ -7,12 +7,14 @@ import SingnIn from './pages/SignIn';
 // import SingnUp from './pages/SigninUp';
 
 import { AuthProvider } from './hooks/AuthContext';
+import ToastContainer from './components/ToastContainer';
 
 const App: React.FC = () => (
   <StyleSheetManager shouldForwardProp={customIsPropValid}>
     <AuthProvider >
     <SingnIn /> 
     </AuthProvider>
+    <ToastContainer />
     <GlobalStyles />
   </StyleSheetManager>
 
