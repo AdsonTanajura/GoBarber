@@ -11,7 +11,6 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { useAuth } from "../../hooks/AuthContext";
 import { useToast } from "../../hooks/ToastContext";
-// import getValidationError from "../../utils/getValidationError";
 
 
 interface SingInFormData {
@@ -47,12 +46,11 @@ const SingnIn: React.FC = () =>{
                 password: data.password,
             })
         } catch (err) {
-            // if (err instanceof Yup.ValidationError) {
-            //     err.inner.forEach((err) => {
-            //         console.log(`Erro no campo ${err.path}: ${err.message}`);
-            //     });
-            // }
-            addToast();
+            addToast({
+                type: 'error',
+                title: 'Error na autenticacao',
+                description: 'Ocorreu um erro ao fazer login, cheque as credenciais'
+            });
         }
     }, [schema, singIn, addToast]);
 
