@@ -1,19 +1,23 @@
 import React, {useCallback} from "react";
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
+
 
 
 import { FiMail, FiLock, FiUser, FiArrowLeft} from 'react-icons/fi';
 
 import logoImg from '../../assets/Logo.svg';
 
-import { Container, Content, Background } from './styles';
+import { Container, Content, Background, AnimationContainer } from './styles';
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 
 
 
 const SingnUp: React.FC = () =>{
+
+
     const initialValues = {
         name: '',
         email: '',
@@ -35,24 +39,27 @@ const SingnUp: React.FC = () =>{
         <Container>
             <Background />
             <Content>
-                <img src={logoImg} alt="GoBarber" />
+                <AnimationContainer>
 
-                <Formik
-                    initialValues={initialValues}
-                    onSubmit={handleSubmit}
-                    validationSchema={schema}
-                >
-                    {() => (
-                        <Form >
-                            <h1>Faça seu logon</h1>
-                            <Input name="name" icon={FiUser} placeholder="Nome" />
-                            <Input name="email" icon={FiMail} placeholder="E-mail" />
-                            <Input name="password" icon={FiLock} type="password" placeholder="Senha" />
-                            <Button type="submit">Cadastrar</Button>
-                        </Form>
-                    )}
-                </Formik>
-                <a href="adw"><FiArrowLeft/>Voltar para o login</a>
+                    <img src={logoImg} alt="GoBarber" />
+
+                    <Formik
+                        initialValues={initialValues}
+                        onSubmit={handleSubmit}
+                        validationSchema={schema}
+                    >
+                        {() => (
+                            <Form >
+                                <h1>Faça seu logon</h1>
+                                <Input name="name" icon={FiUser} placeholder="Nome" />
+                                <Input name="email" icon={FiMail} placeholder="E-mail" />
+                                <Input name="password" icon={FiLock} type="password" placeholder="Senha" />
+                                <Button type="submit">Cadastrar</Button>
+                            </Form>
+                        )}
+                    </Formik>
+                    <Link to={'/'}><FiArrowLeft/>Voltar para o login</Link>
+                </AnimationContainer>
             </Content>
  </Container>
     )

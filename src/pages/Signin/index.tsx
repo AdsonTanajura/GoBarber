@@ -2,11 +2,13 @@ import React, { useCallback } from "react";
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
+
 
 
 import logoImg from '../../assets/Logo.svg';
 
-import { Container, Content, Background } from './styles';
+import { Container, Content, Background, AnimationContainer } from './styles';
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { useAuth } from "../../hooks/AuthContext";
@@ -57,21 +59,23 @@ const SingnIn: React.FC = () =>{
     return (
         <Container>
             <Content>
-                <img src={logoImg} alt="GoBarber" />
-                <Formik 
-                    initialValues={initialValues}
-                    onSubmit={handleSubmit}
-                    validationSchema={schema}
-                    >
-                    <Form>
-                        <h1>Faca seu logon</h1>
-                        <Input name="email" icon={FiMail} placeholder="E-mail" />
-                        <Input name="password" icon={FiLock} type="password" placeholder="Senha" />
-                        <Button type="submit">Entrar</Button>
-                        <a href="fotgot">Esqueci minha senha</a>
-                    </Form>
-                </Formik>
-                <a href="adw"><FiLogIn/>Criar conta</a>
+                <AnimationContainer>
+                    <img src={logoImg} alt="GoBarber" />
+                    <Formik 
+                        initialValues={initialValues}
+                        onSubmit={handleSubmit}
+                        validationSchema={schema}
+                        >
+                        <Form>
+                            <h1>Faca seu logon</h1>
+                            <Input name="email" icon={FiMail} placeholder="E-mail" />
+                            <Input name="password" icon={FiLock} type="password" placeholder="Senha" />
+                            <Button type="submit">Entrar</Button>
+                            <a href="fotgot">Esqueci minha senha</a>
+                        </Form>
+                    </Formik>
+                    <Link to={'/singnup'}><FiLogIn/>Criar conta</Link>
+                </AnimationContainer>
             </Content>
             <Background />
         </Container>
