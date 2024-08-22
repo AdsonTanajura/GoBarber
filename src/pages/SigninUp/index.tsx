@@ -1,7 +1,10 @@
 import React, {useCallback} from "react";
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import api from "../../services/api";
+import { useToast } from "../../hooks/ToastContext";
 
 
 
@@ -13,9 +16,16 @@ import { Container, Content, Background, AnimationContainer } from './styles';
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 
+interface SingUpFormData {
+    name: string;
+    email: string;
+    password: string;
+};
 
 
 const SingnUp: React.FC = () =>{
+    const { addToast } = useToast();
+    const navigate = useNavigate();
 
 
     const initialValues = {
@@ -29,9 +39,30 @@ const SingnUp: React.FC = () =>{
         password: Yup.string().required('Campo obrigatório').min(6, 'A senha tem que ter no minimo 6 digitos')
 
     });
-    const handleSubmit = useCallback( async (data: object) => {
-        console.log(data);
-    }, []);
+    const handleSubmit = useCallback( async (data: SingUpFormData) => {
+        try {
+            await schema.validate(data, {
+                abortEarly: false,
+            });
+
+            await api.post('/users', data);
+
+            addToast({
+                type: 'success',
+                title: 'Cadastro Realizado com sucesso!',
+                description: 'Você já pode fazer seu logon no Gobarber',
+            })
+
+            navigate('/');
+            
+        } catch (err) {
+            addToast({
+                type: 'error',
+                title: 'Error no cadastro',
+                description: 'Ocorreu um erro ao fazer o cadastro, cheque as credenciais, tente novamente'
+            });
+        }
+    }, [addToast,schema,navigate]);
 
     return (
 

@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -27,6 +27,9 @@ const SingnIn: React.FC = () =>{
 
     const { addToast } = useToast();
 
+    const navigate = useNavigate();
+
+
     const initialValues = {
         email: '',
         password: '',
@@ -42,11 +45,13 @@ const SingnIn: React.FC = () =>{
         try {
             await schema.validate(data, {
                 abortEarly: false,
-            })
+            });
             await singIn({
                 email: data.email,
                 password: data.password,
-            })
+            });
+
+            navigate('/dashboard')
         } catch (err) {
             addToast({
                 type: 'error',
@@ -54,7 +59,7 @@ const SingnIn: React.FC = () =>{
                 description: 'Ocorreu um erro ao fazer login, cheque as credenciais'
             });
         }
-    }, [schema, singIn, addToast]);
+    }, [schema, singIn, addToast,navigate]);
 
     return (
         <Container>
